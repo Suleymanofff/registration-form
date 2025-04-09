@@ -46,8 +46,7 @@ func main() {
 	}
 	usersMu.Unlock()
 
-	// Обработчики эндпоинтов
-	http.Handle("/", http.FileServer(http.Dir("./static"))) // предполагаем, что файлы index.html, style.css и app.js находятся в папке static
+	http.Handle("/", http.FileServer(http.Dir("./static"))) // в папке static файлы для фронтенд
 	http.HandleFunc("/register", registerHandler)
 	http.HandleFunc("/login", loginHandler)
 
@@ -55,7 +54,7 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
-// registerHandler обрабатывает регистрацию
+// для формы "Регистрация"
 func registerHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Метод не поддерживается", http.StatusMethodNotAllowed)
@@ -77,7 +76,7 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// При регистрации устанавливаем роль "student"
+	// Каждому новому зарегистрировавшемуся пользователю даётся роль "student"
 	newUser.Role = "student"
 	users[newUser.Email] = newUser
 
@@ -85,7 +84,7 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Регистрация прошла успешно"))
 }
 
-// loginHandler обрабатывает вход пользователя
+// для формы "Войти"
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Метод не поддерживается", http.StatusMethodNotAllowed)
