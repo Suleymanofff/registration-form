@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	const mobileSignIn = document.getElementById('mobileSwitchToSignIn')
 	const mobileSignUp = document.getElementById('mobileSwitchToSignUp')
 
-	// Переключение панелей (оставляем как было)
 	const togglePanel = isSignUp => {
 		container.classList.toggle('right-panel-active', isSignUp)
 		updateMobileSwitcher()
@@ -31,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	updateMobileSwitcher()
 
-	// Обработка событий для форм регистрации и входа
 	const registerForm = document.getElementById('registerForm')
 	const loginForm = document.getElementById('loginForm')
 
